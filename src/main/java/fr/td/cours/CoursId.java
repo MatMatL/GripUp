@@ -1,4 +1,4 @@
-package fr.td.domaine;
+package fr.td.cours;
 
 public record CoursId(String valeur) {
     public CoursId {

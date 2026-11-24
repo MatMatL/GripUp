@@ -1,15 +1,18 @@
-package fr.td.domaine;
+package fr.td.cours;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import fr.td.inscription.GrimpeurId;
+
 public class Cours {
+    /** G10 */
     public static final int CAPACITE_MAXIMALE = 8;
 
     private final CoursId id;
-    private final Set<Grimpeur> participants = new LinkedHashSet<>();
+    private final Set<GrimpeurId> participants = new LinkedHashSet<>();
 
     public Cours(CoursId id) {
         if (id == null)
@@ -21,7 +24,7 @@ public class Cours {
         return id;
     }
 
-    public Set<Grimpeur> participants() {
+    public Set<GrimpeurId> participants() {
         return Collections.unmodifiableSet(participants);
     }
 
@@ -29,16 +32,16 @@ public class Cours {
         return participants.size() >= CAPACITE_MAXIMALE;
     }
 
-    public void inscrire(Grimpeur grimpeur) {
+    public void inscrire(GrimpeurId grimpeur) {
         if (grimpeur == null)
             throw new IllegalArgumentException("le grimpeur est obligatoire");
         if (estComplet())
-            throw new DomaineException("G10 : un cours collectif accueille au plus 8 grimpeurs");
+            throw new InscriptionAuCoursRefusee("G10 : un cours collectif accueille au plus 8 grimpeurs");
         if (!participants.add(grimpeur))
-            throw new DomaineException("ce grimpeur est deja inscrit au cours");
+            throw new InscriptionAuCoursRefusee("ce grimpeur est deja inscrit au cours");
     }
 
-    public void desinscrire(Grimpeur grimpeur) {
+    public void desinscrire(GrimpeurId grimpeur) {
         if (grimpeur != null)
             participants.remove(grimpeur);
     }

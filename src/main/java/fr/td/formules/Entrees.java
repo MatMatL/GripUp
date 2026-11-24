@@ -1,5 +1,6 @@
-package fr.td.domaine;
+package fr.td.formules;
 
+/** Nombre d'entrées d'une carte (G1, G6). */
 public record Entrees(int nombre) {
     public Entrees {
         if (nombre < 0)
